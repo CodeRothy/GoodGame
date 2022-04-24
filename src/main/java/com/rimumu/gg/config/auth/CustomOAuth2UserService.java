@@ -4,6 +4,7 @@ import com.rimumu.gg.config.auth.dto.OAuthAttributes;
 import com.rimumu.gg.config.auth.dto.SessionUser;
 import com.rimumu.gg.domain.user.User;
 import com.rimumu.gg.domain.user.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -11,17 +12,18 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 
-public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+@RequiredArgsConstructor
+@Service
+public class CustomOAuth2UserService implements OAuth2UserService <OAuth2UserRequest, OAuth2User> {
 
     private final UserRepository userRepository;
     private final HttpSession httpSession;
 
-    public CustomOAuth2UserService() {
-    }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
